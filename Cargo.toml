@@ -1,17 +1,24 @@
 [package]
 name = "shotgun"
 description = "Minimal X screenshot utility"
-version = "2.2.0"
+version = "2.3.0"
 authors = ["Dan Elkouby <streetwalkermc@gmail.com>"]
 license = "MPL-2.0"
 repository = "https://github.com/neXromancers/shotgun"
 build = "build.rs"
 edition = "2018"
+readme = "README.md"
+
+[features]
+default = []
+cli = ["getopts", "parse_int"]
+
 
 [dependencies]
-getopts = "0.2"
 libc = "0.2"
-num-traits = "0.2"
+parse_int = { version = "0.4", optional = true }
+getopts = { version = "0.2", optional = true }
+
 
 [dependencies.image]
 default-features = false
@@ -21,3 +28,8 @@ features = ["png", "pnm"]
 [dependencies.x11]
 version = "2.18"
 features = ["xlib", "xrandr"]
+
+[[bin]]
+name = "shotgun"
+required-features = ["cli"]
+

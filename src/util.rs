@@ -1,6 +1,6 @@
 use std::cmp;
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct Rect {
     pub x: i32,
     pub y: i32,
@@ -25,17 +25,5 @@ impl Rect {
         } else {
             None
         }
-    }
-}
-
-pub fn parse_int<T: num_traits::Num>(string: &str) -> Result<T, T::FromStrRadixErr> {
-    if string.len() < 2 {
-        return T::from_str_radix(string, 10)
-    }
-    match &string[..2] {
-        "0x" | "0X" => T::from_str_radix(&string[2..], 16),
-        "0o" | "0O" => T::from_str_radix(&string[2..], 8),
-        "0b" | "0B" => T::from_str_radix(&string[2..], 2),
-        _ => T::from_str_radix(string, 10)
     }
 }

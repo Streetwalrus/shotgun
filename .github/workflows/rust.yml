@@ -1,0 +1,26 @@
+name: Rust
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install x11
+      run: sudo apt-get update && sudo apt-get install -yqq libx11-dev pkg-config build-essential libxrandr-dev
+    - name: Build
+      run: cargo build
+    - name: Build CLI
+      run: cargo build --features cli
+    - name: Run tests
+      run: cargo test
